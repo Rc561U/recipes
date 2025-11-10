@@ -240,16 +240,3 @@ resources/js/pages/Recipes/
 # Generate routes
 ./vendor/bin/sail artisan wayfinder:generate
 ```
-
----
-
-## 📊 Test Results
-
-```
-PASS  Tests\Unit\RecipePolicyTest (8 tests)
-PASS  Tests\Unit\RecipeServiceTest (8 tests)
-PASS  Tests\Feature\RecipeFeatureTest (1 test)
-
-Tests: 28 passed
-Duration: ~11s
-```
