@@ -13,7 +13,7 @@ import { Link, router } from '@inertiajs/vue3';
 import { LogOut, Settings } from 'lucide-vue-next';
 
 interface Props {
-    user: User;
+    user: User | null;
 }
 
 const handleLogout = () => {
@@ -24,31 +24,47 @@ defineProps<Props>();
 </script>
 
 <template>
-    <DropdownMenuLabel class="p-0 font-normal">
-        <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-            <UserInfo :user="user" :show-email="true" />
-        </div>
-    </DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuGroup>
+    <template v-if="user">
+        <DropdownMenuLabel class="p-0 font-normal">
+            <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                <UserInfo :user="user" :show-email="true" />
+            </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+            <DropdownMenuItem :as-child="true">
+                <Link class="block w-full" :href="edit()" prefetch as="button">
+                    <Settings class="mr-2 h-4 w-4" />
+                    Settings
+                </Link>
+            </DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
         <DropdownMenuItem :as-child="true">
-            <Link class="block w-full" :href="edit()" prefetch as="button">
-                <Settings class="mr-2 h-4 w-4" />
-                Settings
+            <Link
+                class="block w-full"
+                :href="logout()"
+                @click="handleLogout"
+                as="button"
+                data-test="logout-button"
+            >
+                <LogOut class="mr-2 h-4 w-4" />
+                Log out
             </Link>
         </DropdownMenuItem>
-    </DropdownMenuGroup>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem :as-child="true">
-        <Link
-            class="block w-full"
-            :href="logout()"
-            @click="handleLogout"
-            as="button"
-            data-test="logout-button"
-        >
-            <LogOut class="mr-2 h-4 w-4" />
-            Log out
-        </Link>
-    </DropdownMenuItem>
+    </template>
+    <template v-else>
+        <DropdownMenuLabel class="p-0 font-normal">
+            <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                <UserInfo :user="null" :show-email="false" />
+            </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem :as-child="true">
+            <Link class="block w-full" href="/login" as="button">
+                <LogOut class="mr-2 h-4 w-4" />
+                Log in
+            </Link>
+        </DropdownMenuItem>
+    </template>
 </template>
