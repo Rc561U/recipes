@@ -50,7 +50,7 @@ cd recipe2
 
 ```bash
 ./vendor/bin/sail artisan test
-# Expected: 32 tests passing
+# Expected: 28 tests passing
 ```
 
 ---
@@ -153,7 +153,7 @@ Models (Data)
 
 ## 🧪 Testing Strategy
 
-### Test Coverage: 32 Tests, 86 Assertions
+### Test Coverage: 28 Tests
 
 **Unit Tests (16 tests)**
 - `RecipeServiceTest`: 8 tests for business logic
@@ -250,7 +250,6 @@ PASS  Tests\Unit\RecipePolicyTest (8 tests)
 PASS  Tests\Unit\RecipeServiceTest (8 tests)
 PASS  Tests\Feature\RecipeFeatureTest (1 test)
 
-Tests: 32 passed (86 assertions)
+Tests: 28 passed
 Duration: ~11s
 ```
-
